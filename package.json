@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "buildpack_task": "node scripts/buildpack_task.js"
   },
   "dependencies": {
     "@google-cloud/translate": "^4.1.3",
