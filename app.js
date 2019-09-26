@@ -5,11 +5,21 @@ const engine = require('ejs-mate');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const basicAuth = require('basic-auth-connect');
 
 const index_router = require('./routes/index');
 const translate_router = require('./routes/translate');
 
 const app = express();
+
+
+if (! process.env.SKIP_BASIC_AUTH) {
+  const username = process.env.BASIC_USERNAME || 'username';
+  const password = process.env.BASIC_PASSWORD || 'password';
+
+  app.use(basicAuth(username, password));
+}
+
 
 // view engine setup
 app.engine('ejs', engine);
