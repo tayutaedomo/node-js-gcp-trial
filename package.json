@@ -3,10 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "buildpack_task": "node scripts/buildpack_task.js"
   },
   "dependencies": {
     "@google-cloud/translate": "^4.1.3",
+    "async": "^3.1.0",
+    "aws-sdk": "^2.536.0",
     "basic-auth-connect": "^1.0.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
