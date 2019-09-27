@@ -5,6 +5,7 @@ const router = express.Router();
 const debug = require('debug')('node-js-gcp-trial:routes:speech');
 const textToSpeech = require('@google-cloud/text-to-speech');
 const gcp_service = require('../services/gcp');
+const Datauri = require('datauri');
 
 
 router.get('/text_to', function(req, res, next) {
@@ -38,8 +39,15 @@ router.post('/text_to', function(req, res, next) {
   debug('text_to:request', request);
 
   client.synthesizeSpeech(request).then(result => {
-    debug(JSON.stringify(result, null, 2));
-    local.data.result = result;
+    //debug(JSON.stringify(result, null, 2));
+    local.data.result = JSON.stringify(result);
+
+    if (! result || ! result[0]) return;
+
+    local.data.datauri = new Datauri();
+    local.data.datauri.format('.mp3', result[0].audioContent);
+
+    debug(local.data.datauri);
 
   }).catch((err) => {
     console.error(err.stack || err);
