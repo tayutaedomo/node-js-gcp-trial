@@ -13,6 +13,7 @@
     "aws-sdk": "^2.536.0",
     "basic-auth-connect": "^1.0.0",
     "cookie-parser": "~1.4.4",
+    "datauri": "^2.0.0",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
     "ejs-mate": "^3.0.0",
