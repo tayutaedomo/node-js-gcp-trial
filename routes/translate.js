@@ -2,18 +2,14 @@
 const express = require('express');
 const router = express.Router();
 
-
 const debug = require('debug')('node-js-gcp-trial:routes:translate');
-const path = require('path');
 const {Translate} = require('@google-cloud/translate');
 const gcp_service = require('../services/gcp');
-
-const TITLE = 'Translate - GCP Trial';
 
 
 router.get('/', function(req, res, next) {
   const local = {
-    title: TITLE,
+    title: 'Translation',
     data: {}
   };
 
@@ -22,7 +18,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   const local = {
-    title: TITLE,
+    title: 'Translation',
     data: {}
   };
 
