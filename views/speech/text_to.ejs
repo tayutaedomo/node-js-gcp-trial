@@ -8,6 +8,15 @@
   <div class="col-sm-6">
     <form action="/speech/text_to" method="POST">
       <div class="form-group">
+        <label>Language:</label>
+        <select name="language" class="form-control">
+          <option value="en-US" selected>en-US</option>
+          <option value="ja-JP">ja-JP</option>
+          <option value="vi-VN">vi-VN</option>
+        </select>
+      </div>
+
+      <div class="form-group">
         <label>Text:</label>
         <textarea name="text" row="5" class="form-control"></textarea>
       </div>

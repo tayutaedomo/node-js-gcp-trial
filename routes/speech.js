@@ -25,9 +25,10 @@ router.post('/text_to', function(req, res, next) {
 
   const client = new_client();
   const text = req.body.text;
+  const language = req.body.language || 'en-US';
   const request = {
     input: { text: text },
-    voice: { languageCode: 'en-US', ssmlGender: 'NEUTRAL' },
+    voice: { languageCode: language, ssmlGender: 'NEUTRAL' },
     audioConfig: { audioEncoding: 'MP3' },
   };
 
