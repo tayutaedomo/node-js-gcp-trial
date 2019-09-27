@@ -23,13 +23,8 @@ router.post('/text_to', function(req, res, next) {
     data: {}
   };
 
-  const client = new textToSpeech.TextToSpeechClient({
-    projectId: gcp_service.get_project_id(),
-    keyFilename: gcp_service.get_key_file_path()
-  });
-
+  const client = new_client();
   const text = req.body.text;
-
   const request = {
     input: { text: text },
     voice: { languageCode: 'en-US', ssmlGender: 'NEUTRAL' },
@@ -58,6 +53,34 @@ router.post('/text_to', function(req, res, next) {
     res.render('speech/text_to', local);
   });
 });
+
+
+router.get('/voices', function(req, res, next) {
+  const local = {
+    title: 'Voices List',
+    data: {}
+  };
+
+  const client = new_client();
+  client.listVoices({}).then(result => {
+    local.data.result = JSON.stringify(result, null, 2);
+
+  }).catch(err => {
+    console.error(err.stack || err);
+    local.data.error = err;
+
+  }).finally(() => {
+    res.render('speech/voices', local);
+  });
+});
+
+
+const new_client = () => {
+  return new textToSpeech.TextToSpeechClient({
+    projectId: gcp_service.get_project_id(),
+    keyFilename: gcp_service.get_key_file_path()
+  });
+};
 
 
 module.exports = router;
