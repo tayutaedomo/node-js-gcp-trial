@@ -9,6 +9,7 @@ const basicAuth = require('basic-auth-connect');
 
 const index_router = require('./routes/index');
 const translate_router = require('./routes/translate');
+const speech_router = require('./routes/speech');
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/translate', translate_router);
+app.use('/speech', speech_router);
 app.use('/', index_router);
 
 // catch 404 and forward to error handler

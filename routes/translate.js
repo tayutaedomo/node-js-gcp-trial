@@ -2,17 +2,14 @@
 const express = require('express');
 const router = express.Router();
 
-
 const debug = require('debug')('node-js-gcp-trial:routes:translate');
-const path = require('path');
 const {Translate} = require('@google-cloud/translate');
-
-const TITLE = 'Translate - GCP Trial';
+const gcp_service = require('../services/gcp');
 
 
 router.get('/', function(req, res, next) {
   const local = {
-    title: TITLE,
+    title: 'Translation',
     data: {}
   };
 
@@ -21,17 +18,13 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   const local = {
-    title: TITLE,
+    title: 'Translation',
     data: {}
   };
 
-  const project_id = process.env.GCP_PROJECT_ID || '';
-  const key_file_name = process.env.GCP_CERT_FILE_NAME || '';
-  const key_path = path.join(__dirname, '..', 'etc', 'google-cloud', key_file_name);
-
   const translate = new Translate({
-    projectId: project_id,
-    keyFilename: key_path
+    projectId: gcp_service.get_project_id(),
+    keyFilename: gcp_service.get_key_file_path()
   });
 
   debug('index:req.body', req.body);
