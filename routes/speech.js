@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const debug = require('debug')('node-js-gcp-trial:routes:speech');
+const _ = require('underscore');
 const textToSpeech = require('@google-cloud/text-to-speech');
 const gcp_service = require('../services/gcp');
 const Datauri = require('datauri');
@@ -25,12 +26,15 @@ router.post('/text_to', function(req, res, next) {
 
   const client = new_client();
   const text = req.body.text;
-  const language = req.body.language || 'en-US';
+  const language = req.body.language;
   const request = {
     input: { text: text },
-    voice: { languageCode: language, ssmlGender: 'NEUTRAL' },
+    //voice: { languageCode: language, ssmlGender: 'NEUTRAL' },
+    voice: { ssmlGender: 'NEUTRAL' },
     audioConfig: { audioEncoding: 'MP3' },
   };
+
+  if (! _.isEmpty(language)) request.voice.languageCode = language;
 
   debug('text_to:request', request);
 
