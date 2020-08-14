@@ -18,3 +18,12 @@ $ open 'http://0.0.0.0:8080/'
 ```
 Basic Auth: username / password
 
+
+# Docker
+```
+$ cd node-js-gcp-trial
+$ docker build -t node-js-gcp-trial .
+$ docker run --rm -it -e PORT=8080 -p 8080:8080 node-js-gcp-trial
+$ open 'http://0.0.0.0:8080'
+```
+
